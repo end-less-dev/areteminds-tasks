@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+*{
+    font-family: 'Ubuntu',sans-serif;
+
+}
+.error{
+    border: 2px solid red;
+}
+.thank-img{
+    height: 150px;
+    object-fit: cover;
+}
+.gap{
+    padding-top: 150px;
+    margin: auto;
+}
+a{
+    text-decoration: none;
+}
+.box{
+  border-radius: 12px;
+  background:cornsilk;
+}
+.title{
+    font-size: 2rem;
+    text-align: center;
+    font-weight: 400;
+}
+.layout-content{
+    display: flex;
+    flex-direction: row;
+   
+}
+.org-container{
+    width: 100%;
+    margin-left: 20px;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+
+}
+/* @media (max-width:700px){
+    .main .container .row{
+        display: grid;
+        grid-template-columns: repeat(1,auto);
+    }
+    .main .container{
+        width: 50%;
+    }
+    .container .login{
+        width: 70%;
+    }
+} */
+.pin-res{
+    width: 50%;
+}
+.filter-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+}
+.filter-div .filter-inputs{
+    display: flex;
+}
+.filter-div .filter-inputs input{
+    margin-left: 10px;
+}
+.filter-div .filter-btns{
+    display: flex;
+}
+.filter-div .filter-btns button{
+    margin-left: 10px;
+}
+@media(max-width:768px){
+    .pin-res{
+        width: 100%;
+    }
+    .container{
+        width: 100%;
+    }
+    .title{
+        font-size: 1rem;
+        text-align: center;
+        font-weight: 400;
+    }
+    .filter-div{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .filter-div .filter-btns{
+        display: flex;
+        margin-top: 10px;
+    }
+}
