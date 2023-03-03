@@ -1,6 +1,5 @@
 import { Country,State,City } from "country-state-city";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import style from "./style.module.css"
 import "./index.css"
 import Sidebar from "./layouts";
@@ -9,8 +8,7 @@ const EditProfile = ()=>{
     const country = Country.getAllCountries();
     const state = State.getAllStates();
     const city = City.getAllCities();
-    const navigate = useNavigate();
-    
+  
     // country-state-city functions
     const[countryValue,setCountryValue] = useState("")
     const handleCountry = (e)=>{
