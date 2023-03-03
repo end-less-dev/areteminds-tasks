@@ -62,11 +62,17 @@ const PersonalInfo = ()=>{
     const[marValidate,setMarValidate] = useState(false)
     const[optValidate,setOptValidate] = useState(false);
 
+    //Regular Expressions
+    let aadharNoRegEx = /^[2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4}$/;
+    let PassportRegEx = /^[A-PR-WYa-pr-wy][1-9]\\d\\s?\\d{4}[1-9]$/;
+
     const handleName = (e)=>{
         setName(e.target.value)
     }
     const handleAadharNo = (e)=>{
-        setAadharNo(e.target.value)
+       // setAadharNo(e.target.value)
+        setAadharNo( e.target.value = e.target.value.replace(/[^\dA-Z]/g, '').replace(/(.{4})/g, '$1 ').trim())
+        console.log(e.target.value.length)
     }
     const handlePassport = (e)=>{
         setPassportNo(e.target.value);
@@ -108,11 +114,31 @@ const PersonalInfo = ()=>{
             setAadharNoValidate(true)
             setAddharErrMsg("Please enter Aadhar Number")
         }
+        if(aadharNo !== "" && aadharNoRegEx.test(aadharNo) === false){
+            flag = false
+            setAadharNoValidate(true)
+            setAddharErrMsg("Please enter valid Aadhar Number")
+        }
+        if(aadharNo !== "" && aadharNo.length < 14){
+            flag = false
+            setAadharNoValidate(true)
+            setAddharErrMsg("Aadhar number must be 12 digits")
+        }
         if(passportNo === ""){
             flag = false
             setPassportValidate(true)
             setPassportErrMsg("Please enter Passport Number")
         }
+        if(passportNo !== "" && PassportRegEx.test(passportNo) === false){
+            flag = false
+            setPassportValidate(true)
+            setPassportErrMsg("Please valid Passport Number")
+        }
+        // if(passportNo !== "" && passportNo.length < 9){
+        //     flag = false
+        //     setPassportValidate(true)
+        //     setPassportErrMsg("Passport Number must be 8 characters")
+        // }
         if(passExpiry === ""){
             flag = false
             setExpiryValidate(true)
@@ -161,7 +187,13 @@ const PersonalInfo = ()=>{
                             <div className="col">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Addhar Number</label>
-                                    <input type="text" className={`form-control ${aadharNoValidate ? "error":""}`} placeholder="Addhar Number" onChange={handleAadharNo}/>
+                                    <input type="text" className={`form-control ${aadharNoValidate ? "error":""}`} placeholder="Addhar Number"  maxLength={14} onChange={handleAadharNo}
+                                    onKeyPress={(event) => {
+                                        if (!/[0-9]/.test(event.key)) {
+                                        event.preventDefault();
+                                        }
+                                    }}
+                                    />
                                     {aadharNoErrMsg?.length > 0 && (
                                         <p className={style.msg}>{aadharNoErrMsg}</p>
                                     )}
@@ -182,7 +214,8 @@ const PersonalInfo = ()=>{
                             <div className="col">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Passport Number</label>
-                                    <input type="text" className={`form-control ${passportValidate ? "error":""}`}  placeholder="Passport Number" onChange={handlePassport}/>
+                                    <input type="text" className={`form-control ${passportValidate ? "error":""}`}  placeholder="Passport Number"  onChange={handlePassport}
+                                    />
                                     {passportErrMsg?.length > 0 &&(
                                         <p className={style.msg}>{passportErrMsg}</p>
                                     )}

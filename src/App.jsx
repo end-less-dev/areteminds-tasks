@@ -10,6 +10,7 @@ import TestCountry from "./components/TestCountry";
 import List from "./components/List";
 import ViewList from "./components/ViewList";
 import PersonalInfo from "./components/PersonalInfo";
+import AddItems from "./components/AddItems";
 
 const App =()=>{
     return(
@@ -26,6 +27,7 @@ const App =()=>{
                 <Route path="/list" element={<List/>}/>
                 <Route path="/viewList/:id" element={<ViewList/>}/>
                 <Route path="/personalInfo" element={<PersonalInfo/>}/>
+                <Route path="/addItems" element={<AddItems/>}/>
             </Routes>
         </Router>
     )
