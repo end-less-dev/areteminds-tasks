@@ -21,6 +21,16 @@ const AddItems = ()=>{
     const[quantity,setQuantity] = useState("");
     const[totalPrice,setTotalPrice] = useState("");
 
+      const[formData,setFormData] = useState({
+        itemId:"",
+        design:"",
+        productId:"",
+        size:"",
+        price:"",
+        quantity:"",
+        totalPrice:""
+    });
+
     const[idErrMsg,setIdErrMsg] = useState("")
     const[designErrMsg,setDesignErrMsg] = useState("");
     const[proIdErrMsg,setProIdErrMsg] = useState("");
@@ -39,25 +49,36 @@ const AddItems = ()=>{
 
     const handleId = (e)=>{
         setItemId(e.target.value)
+        //setFormData(formData.itemId[e.target.value])
+        setFormData({...formData,itemId:e.target.value})
     }
     const handleDesign = (e)=>{
         setDesign(e.target.value)
+        setFormData({...formData,design:e.target.value})
     }
     const handleProduct = (e)=>{
         setProductId(e.target.value)
+        setFormData({...formData,productId:e.target.value})
     }
     const handleSize = (e)=>{
         setSize(e.target.value)
+        setFormData({...formData,size:e.target.value})
     }
     const handlePrice = (e)=>{
         setPrice(e.target.value)
+        setFormData({...formData,price:e.target.value})
     }
     const handleQuantity = (e)=>{
         setQuantity(e.target.value)
+        setFormData({...formData,quantity:e.target.value})
     }
     const handleTotalprice = (e)=>{
         setTotalPrice(e.target.value)
+        setFormData({...formData,totalPrice:e.target.value})
     }
+
+    const[tableData,setTableData] = useState([])
+
     const handleSave = (e)=>{
         e.preventDefault();
         let flag = true;
@@ -112,7 +133,13 @@ const AddItems = ()=>{
             setTotPriceValidate(true)
         }
         if(flag === true){
-
+            //let formDatas = {itemId,design,productId,size,price,quantity,totalPrice}
+            //console.log(JSON.stringify(formDatas))
+            //const aa = JSON.stringify(formDatas)
+           //setFormData(aa)
+            //console.log("formData",formData)
+            const newData = (data)=>([...data,formData])
+            setTableData(newData)
         }
     }
 
@@ -138,17 +165,17 @@ const AddItems = ()=>{
                                 </tr>
                             </thead>
                             <tbody>
-                                {rowCount.map((row)=>{
+                                {tableData.map((x,index)=>{
                                     return(
-                                        <tr key={row.id} style={{textAlign:"center"}}>
-                                            <td><input type="text" value={row.id}  className="inp-width"/></td>
-                                            <td><input type="text"  className="inp-width"/></td>
-                                            <td><input type="text"  className="inp-width"/></td>
-                                            <td><input type="text"  className="inp-width"/></td>
-                                            <td><input type="text"  className="inp-width"/></td>
-                                            <td><input type="text"  className="inp-width"/></td>
-                                            <td><input type="text"  className="inp-width"/></td>
-                                            <td><button className="btn btn-danger" onClick={()=>handleDelete(row.id)}>Delete</button></td>
+                                        <tr key={index}>
+                                            <td>{x.itemId}</td>
+                                            <td>{x.design}</td>
+                                            <td>{x.productId}</td>
+                                            <td>{x.size}</td>
+                                            <td>{x.price}</td>
+                                            <td>{x.quantity}</td>
+                                            <td>{x.totalPrice}</td>
+                                            <td>del</td>
                                         </tr>
                                     )
                                 })}
@@ -160,58 +187,98 @@ const AddItems = ()=>{
                     </div>
                     {/* Modal */}
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-lg modal-sm">
                         <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">Add Items</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Line Item Id</label>
-                                <input type="text" className={`form-control ${idValidate ? "error":""}`}  placeholder="Please enter Id" onChange={handleId} />
-                                {idErrMsg?.length > 0 && (
-                                    <p >{idErrMsg}</p>
-                                )}
+                            <div className="row">
+                                <div className="col">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Line Item Id</label>
+                                        <input type="text" className={`form-control ${idValidate ? "error":""}`}  placeholder="Please enter Id" onChange={handleId} />
+                                        {idErrMsg?.length > 0 && (
+                                            <p className={style.msg}>{idErrMsg}</p>
+                                        )}
+                                    </div>
+                                </div>
+                                <div className="col">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Design</label>
+                                        <select className={`form-select ${desValidate ? "error":""}`} aria-label="Default select example" onChange={handleDesign}>
+                                            <option selected>Designs</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                        {designErrMsg?.length > 0 && (
+                                            <p className={style.msg}>{designErrMsg}</p>
+                                        )}
+                                </div>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Design</label>
-                                <select class="form-select" aria-label="Default select example" onChange={handleDesign}>
-                                    <option selected>Designs</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
+                            <div className="row">
+                                <div className="col">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Product Id</label>
+                                        <input type="text" className={`form-control ${prodValidate ? "error":""}`}  placeholder="Please enter Product Id" onChange={handleProduct}/>
+                                        {proIdErrMsg?.length > 0 && (
+                                            <p className={style.msg}>{proIdErrMsg}</p>
+                                        )}
+                                    </div>
+                                </div>
+                                <div className="col">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Size</label>
+                                        <select className={`form-select ${sizeValidate ? "error":""}`} aria-label="Default select example" onChange={handleSize}>
+                                            <option selected>Choose Size</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                        {sizeErrMsg?.length > 0 && (
+                                            <p className={style.msg}>{sizeErrMsg}</p>
+                                        )}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Product Id</label>
-                                <input type="text" class="form-control"  placeholder="Please enter Product Id" onChange={handleProduct}/>
+                            <div className="row">
+                                <div className="col">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Price per pair</label>
+                                        <input type="text" className={`form-control ${priceValidate ? "error":""}`}  placeholder="Please enter Id" onChange={handlePrice}/>
+                                        {priceErrMsg?.length > 0 && (
+                                            <p className={style.msg}>{priceErrMsg}</p>
+                                        )}
+                                    </div>
+                                </div>
+                                <div className="col">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Quantity</label>
+                                        <input type="text" className={`form-control ${quanValidate ? "error":""}`}  placeholder="Please enter Id" onChange={handleQuantity}/>
+                                        {quanErrMsg?.length > 0 && (
+                                            <p className={style.msg}>{quanErrMsg}</p>
+                                        )}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Size</label>
-                                <select class="form-select" aria-label="Default select example" onChange={handleSize}>
-                                    <option selected>Choose Size</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Price per pair</label>
-                                <input type="text" class="form-control"  placeholder="Please enter Id" onChange={handlePrice}/>
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Quantity</label>
-                                <input type="text" class="form-control"  placeholder="Please enter Id" onChange={handleQuantity}/>
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Total Price</label>
-                                <input type="text" class="form-control"  placeholder="Please enter Id" onChange={handleTotalprice}/>
-                            </div>
+                            <div className="row">
+                                <div className="col">
+                                    <div class="mb-3" style={{width:"50%"}}>
+                                        <label for="exampleFormControlInput1" class="form-label">Total Price</label>
+                                        <input type="text" className={`form-control ${totPriceValidate ? "error":""}`}  placeholder="Please enter Id" onChange={handleTotalprice}/>
+                                        {totPriceErrMsg?.length > 0 && (
+                                            <p className={style.msg}>{totPriceErrMsg}</p>
+                                        )}
+                                    </div>
                         </div>
+                                </div>
+                            </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-primary" onClick={handleSave}>Save</button>
                         </div>
                         </div>
                     </div>
