@@ -4,14 +4,12 @@ import style from "./style.module.css"
 
 const AddItems = ()=>{
 
-     const[rowCount,setRowCount] = useState([]);
+    // const[rowCount,setRowCount] = useState([]);
     // const add = ()=>{
     //     const data = {id : rowCount.length + 1}
     //     setRowCount([...rowCount,data])
     // }
-    const handleDelete = (id)=>{
-		setRowCount(rowCount.filter((row)=> row.id !== id))
-	}
+   
 
     const[itemId,setItemId] = useState("");
     const[design,setDesign] = useState("");
@@ -142,6 +140,9 @@ const AddItems = ()=>{
             setTableData(newData)
         }
     }
+    const handleDelete = (itemId)=>{
+		setTableData(tableData.filter((x)=>x.itemId !== itemId))
+	}
 
     return(
         <>
@@ -175,7 +176,7 @@ const AddItems = ()=>{
                                             <td>{x.price}</td>
                                             <td>{x.quantity}</td>
                                             <td>{x.totalPrice}</td>
-                                            <td>del</td>
+                                            <td><button onClick={()=>{handleDelete(x.itemId)}} style={{border:"none"}}><i class="bi bi-trash3-fill" style={{color:"red",cursor:"pointer"}}></i></button></td>
                                         </tr>
                                     )
                                 })}
