@@ -9,13 +9,11 @@ const PersonalInfo = ()=>{
     const handleDate =(e)=>{
         setDateValue(e.target.value)
     }
-    const systemDate = new Date();
-    const sysYear = systemDate.getFullYear();
-    const inputDate = new Date(dateValue);
-    const inputYear = inputDate.getFullYear()
-    if(inputYear){
-        var age = (sysYear-inputYear)
-        console.log(age)
+    const birthDate = new Date(dateValue);
+    const currentDate = new Date();
+    const ageInMilliseconds = currentDate - birthDate;
+    if(ageInMilliseconds){
+        var ageInYears = Math.floor(ageInMilliseconds / 31536000000);
     }
 
     //Marital Status
@@ -245,7 +243,7 @@ const PersonalInfo = ()=>{
                             <div className="col">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Age</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" value={age}/>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" value={ageInYears}/>
                                 </div>
                             </div>
                         </div>

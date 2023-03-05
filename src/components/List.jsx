@@ -16,7 +16,7 @@ const List = ()=>{
             setFilterData(response.data)
         })
         .catch((error)=>console.log(error))
-    },[])
+    },[searchTerm])
 
     // useEffect(()=>{
     //     setFilterData(items.filter((x)=>x.name.toLowerCase().includes(searchTerm.toLowerCase())))
@@ -27,7 +27,7 @@ const List = ()=>{
     }
     const clearFilter = ()=>{
         setSearchTerm("")
-        setFilterData(items.filter((x)=>x.name.toLowerCase().includes(searchTerm.toLowerCase())))
+        //setFilterData(items.filter((x)=>x.name.toLowerCase().includes(searchTerm.toLowerCase())))
     }
 
     const handleInput = (e)=>{
