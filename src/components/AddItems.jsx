@@ -1,16 +1,22 @@
 import Sidebar from "./layouts";
 import { useState } from "react";
 import style from "./style.module.css"
-import $ from "jquery"
+// import  $ from "jquery"
+// import "bootstrap"
+// import Box from '@mui/material/Box';
+// import Button from '@mui/material/Button';
+// import Typography from '@mui/material/Typography';
+// import Modal from '@mui/material/Modal';
+import Modal from "react-bootstrap/Modal"
+import Button from 'react-bootstrap/Button';
+
 
 const AddItems = ()=>{
 
-    // const[rowCount,setRowCount] = useState([]);
-    // const add = ()=>{
-    //     const data = {id : rowCount.length + 1}
-    //     setRowCount([...rowCount,data])
-    // }
-   
+    // Modal functions 
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const[itemId,setItemId] = useState("");
     const[design,setDesign] = useState("");
@@ -76,10 +82,8 @@ const AddItems = ()=>{
         setTotalPrice(e.target.value)
         setFormData({...formData,totalPrice:e.target.value})
     }
-   const[modalBtn,setModalBtn] = useState(false)
 
     const[tableData,setTableData] = useState([])
-
     const handleSave = (e)=>{
         e.preventDefault();
         let flag = true;
@@ -97,56 +101,43 @@ const AddItems = ()=>{
         setPriceValidate(false)
         setQuanValidate(false)
         setTotPriceValidate(false)
-        setModalBtn(false)
 
         if(itemId === ""){
             flag = false;
             setIdErrMsg("Please enter Id");
             setIdValidate(true)
-            setModalBtn(false)
         }
         if(design === ""){
             flag = false;
             setDesignErrMsg("Please choose Design")
             setDesValidate(true)
-            setModalBtn(false)
         }
         if(productId === ""){
             flag = false
             setProIdErrMsg("Please enter Product Id")
             setProdValidate(true)
-            setModalBtn(false)
         }
         if(size === ""){
             flag = false;
             setSizeErrMsg("Please choose Size");
             setSizeValidate(true)
-            setModalBtn(false)
         }
         if(price === ""){
             flag = false;
             setPriceErrMsg("Please enter Price")
             setPriceValidate(true)
-            setModalBtn(false)
         }
         if(quantity === ""){
             flag = false
             setQuanErrMsg("Please enter Quantity")
             setQuanValidate(true)
-            setModalBtn(false)
         }
         if(totalPrice === ""){
             flag = false
             setTotpriceErrMsg("Please enter Total Price");
             setTotPriceValidate(true)
-            setModalBtn(false)
         }
         if(flag === true){
-            //let formDatas = {itemId,design,productId,size,price,quantity,totalPrice}
-            //console.log(JSON.stringify(formDatas))
-            //const aa = JSON.stringify(formDatas)
-           //setFormData(aa)
-            //console.log("formData",formData)
             const newData = (data)=>([...data,formData])
             setTableData(newData)
             setItemId("")
@@ -156,12 +147,13 @@ const AddItems = ()=>{
             setSize("")
             setQuantity("")
             setTotalPrice("")
-            setModalBtn(true)
+           setShow(false)
         }
     }
     const handleDelete = (itemId)=>{
 		setTableData(tableData.filter((x)=>x.itemId !== itemId))
 	}
+ 
 
     return(
         <>
@@ -195,26 +187,25 @@ const AddItems = ()=>{
                                             <td>{x.price}</td>
                                             <td>{x.quantity}</td>
                                             <td>{x.totalPrice}</td>
-                                            <td><button onClick={()=>{handleDelete(x.itemId)}} style={{border:"none"}}><i class="bi bi-trash3-fill" title="delete" style={{color:"red",cursor:"pointer"}}></i></button></td>
+                                            <td><button onClick={()=>{handleDelete(x.itemId)}} style={{border:"none"}}>
+                                                <i class="bi bi-trash3-fill" title="delete" style={{color:"red",cursor:"pointer"}}></i>
+                                            </button></td>
                                         </tr>
                                     )
                                 })}
                             </tbody>
                         </table>
+                        <div className="wai">
+                        <button className="btn btn-primary" onClick={handleShow}>Add Line Items</button>
                     </div>
-                    <div className="wai">
-                        <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Line Items</button>
                     </div>
                     {/* Modal */}
-                    <div class="modal fade" id="exampleModal"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-sm">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">Add Items</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div className="row">
+                    <Modal show={show} onHide={handleClose} size="lg">
+                        <Modal.Header closeButton>
+                        <Modal.Title>Add Items</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                        <div className="row">
                                 <div className="col">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Line Item Id</label>
@@ -295,14 +286,16 @@ const AddItems = ()=>{
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" data-bs-toggle={`${modalBtn ? "modal":""}`} onClick={handleSave}>Save</button>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
+                        </Modal.Body>
+                        <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="primary" onClick={handleSave}>
+                            Save
+                        </Button>
+                        </Modal.Footer>
+                </Modal>
                 </div>
             </div>
         </div>

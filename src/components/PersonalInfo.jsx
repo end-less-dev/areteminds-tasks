@@ -243,7 +243,7 @@ const PersonalInfo = ()=>{
                             <div className="col">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Age</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" value={ageInYears}/>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" value={ageInYears} readOnly/>
                                 </div>
                             </div>
                         </div>
