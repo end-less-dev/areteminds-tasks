@@ -92,6 +92,13 @@ a{
         display: flex;
         margin-top: 10px;
     }
+    .myflex{
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap:10px;
+        flex-direction: column;
+    }
 }
 .home-page{
     width: 100%;
@@ -102,4 +109,20 @@ a{
 }
 .inp-width{
     width: 50%;
+}
+Button{
+    border: none;
+}
+.myflex{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap:10px;
+}
+.card-body{
+    overflow: hidden;
+}
+.flex-con{
+    display: flex;
+    justify-content: space-between;
 }

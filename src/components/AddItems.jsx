@@ -18,6 +18,7 @@ const AddItems = ()=>{
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    // Validations 
     const[itemId,setItemId] = useState("");
     const[design,setDesign] = useState("");
     const[productId,setProductId] = useState("");
@@ -147,7 +148,7 @@ const AddItems = ()=>{
             setSize("")
             setQuantity("")
             setTotalPrice("")
-           setShow(false)
+            setShow(false)
         }
     }
     const handleDelete = (itemId)=>{
@@ -200,7 +201,7 @@ const AddItems = ()=>{
                     </div>
                     </div>
                     {/* Modal */}
-                    <Modal show={show} onHide={handleClose} size="lg">
+                    <Modal show={show} onHide={handleClose} size="lg sm">
                         <Modal.Header closeButton>
                         <Modal.Title>Add Items</Modal.Title>
                         </Modal.Header>
