@@ -1,0 +1,14 @@
+[
+    {
+        "fname":"Sanjay",
+        "lname":"M",
+        "gender":"Male",
+        "height":"170",
+        "weight":"50",
+        "dob":"2023-03-11",
+        "email":"sanjay@gmail.com",
+        "phone":"",
+        "passport":"787",
+        "healthNo":"8979"
+    }
+]

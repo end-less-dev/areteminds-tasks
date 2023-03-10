@@ -12,6 +12,8 @@ import ViewList from "./components/ViewList";
 import PersonalInfo from "./components/PersonalInfo";
 import AddItems from "./components/AddItems";
 import ProfileCard from "./components/ProfileCard";
+import AddDep from "./components/AddDep";
+import EditDep from "./components/EditDep";
 
 const App =()=>{
     return(
@@ -30,6 +32,8 @@ const App =()=>{
                 <Route path="/personalInfo" element={<PersonalInfo/>}/>
                 <Route path="/addItems" element={<AddItems/>}/>
                 <Route path="/profileCard" element={<ProfileCard/>}/>
+                <Route path="/addDep" element={<AddDep/>}/>
+                <Route path="/editDep/:id" element={<EditDep/>}/>
             </Routes>
         </Router>
     )
