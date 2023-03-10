@@ -20,6 +20,9 @@ const ProfileCard = ()=>{
     const editDepPage = (id)=>{
         navigate(`/editDep/${id}`)
     }
+    const handleView = (viewId)=>{
+        navigate(`/viewDep/${viewId}`)
+    }
 
     return(
         <>
@@ -45,6 +48,7 @@ const ProfileCard = ()=>{
                                         <div className="two">
                                             <i class="bi bi-pen-fill" style={{cursor:"pointer"}} onClick={()=>{editDepPage(data.healthNo)}}></i>
                                             <i class="bi bi-trash3-fill" style={{marginLeft:"5px",color:"red",cursor:"pointer"}} onClick={()=>{handleDelete(data.healthNo)}}></i>
+                                            <i class="bi bi-eye-fill" style={{marginLeft:"5px",color:"blue",cursor:"pointer"}} onClick={()=>{handleView(data.healthNo)}}></i>
                                         </div>
                                     </div>
                                     <div className="flex-con">

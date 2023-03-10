@@ -14,6 +14,7 @@ import AddItems from "./components/AddItems";
 import ProfileCard from "./components/ProfileCard";
 import AddDep from "./components/AddDep";
 import EditDep from "./components/EditDep";
+import ViewDep from "./components/ViewDep";
 
 const App =()=>{
     return(
@@ -34,6 +35,7 @@ const App =()=>{
                 <Route path="/profileCard" element={<ProfileCard/>}/>
                 <Route path="/addDep" element={<AddDep/>}/>
                 <Route path="/editDep/:id" element={<EditDep/>}/>
+                <Route path="/viewDep/:viewId" element={<ViewDep/>}/>
             </Routes>
         </Router>
     )
