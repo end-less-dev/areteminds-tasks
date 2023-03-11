@@ -72,6 +72,32 @@ a{
 .filter-div .filter-btns button{
     margin-left: 10px;
 }
+.home-page{
+    width: 100%;
+    height: 100%;
+    background: url(https://media.tenor.com/5xVYlqLYLZMAAAAC/welcome.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.inp-width{
+    width: 50%;
+}
+Button{
+    border: none;
+}
+.myflex{
+    /* display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap; */
+    gap:10px;
+}
+.card-body{
+    overflow: hidden;
+}
+.flex-con{
+    display: flex;
+    justify-content: space-between;
+}
 @media(max-width:768px){
     .pin-res{
         width: 100%;
@@ -99,30 +125,4 @@ a{
         gap:10px;
         flex-direction: column;
     }
-}
-.home-page{
-    width: 100%;
-    height: 100%;
-    background: url(https://media.tenor.com/5xVYlqLYLZMAAAAC/welcome.gif);
-    background-position: center;
-    background-repeat: no-repeat;
-}
-.inp-width{
-    width: 50%;
-}
-Button{
-    border: none;
-}
-.myflex{
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap:10px;
-}
-.card-body{
-    overflow: hidden;
-}
-.flex-con{
-    display: flex;
-    justify-content: space-between;
 }

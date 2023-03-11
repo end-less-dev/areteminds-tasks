@@ -33,7 +33,7 @@ const ViewList = ()=>{
         <div className="layout-content">
             <Sidebar/>
             <div className="org-container">
-            <button className="btn btn-primary" style={{margin:"30px 0px"}} onClick={back}>Back</button>
+            <button className="btn btn-primary" style={{margin:"30px 0px"}} onClick={back}><i class="bi bi-arrow-left"></i></button>
                 <div className="card">
                     <div className="card-body">
                         <h2 className="card-title" style={{textAlign:"center"}}>User Details</h2>

@@ -3,9 +3,14 @@ import style from "./style.module.css";
 import Card from "../json-packages/Card.json";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Modal from "react-bootstrap/Modal"
+
 
 const EditDep = ()=>{
     const navigate = useNavigate();
+    // Modal functions 
+    const [show, setShow] = useState(false);
+
     const {id} = useParams();
     const idData = Card.find((x)=>x.healthNo === id)
     const index = Card.findIndex((y)=>y.healthNo === id)
@@ -161,8 +166,14 @@ const EditDep = ()=>{
             setWeight("")
             setPassport("")
             setHealthNo("")
-            navigate("/profileCard")
+            // navigate("/profileCard")
+            setShow(true)
         }
+    }
+    const handleModalClose = ()=>{
+        setShow(false)
+        navigate("/profileCard")
+
     }
     const handleCancel = ()=>{
         navigate("/profileCard");
@@ -273,6 +284,14 @@ const EditDep = ()=>{
                                 <button className="btn btn-danger" style={{marginLeft:"10px"}} onClick={handleCancel}>Cancel</button>
                             </div>
                         </div>
+                        <Modal show={show} size="sm" aria-labelledby="contained-modal-title-vcenter" centered>
+                            <Modal.Body>
+                                <h4 style={{textAlign:"center"}}>Successfully Updated</h4>
+                                <div style={{display:"flex",justifyContent:"center"}}>
+                                    <button className="btn btn-primary" onClick={handleModalClose}>okay</button>
+                                </div>
+                            </Modal.Body>
+                        </Modal>
             </div>
         </div>
         </>

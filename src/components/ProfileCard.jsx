@@ -6,6 +6,7 @@ import Card from "../json-packages/Card.json"
 
 
 const ProfileCard = ()=>{
+
     const navigate = useNavigate();
     
     const[data,setData]  = useState(Card)
@@ -35,7 +36,7 @@ const ProfileCard = ()=>{
                 </div>
                 <hr />
                 {/* Card */}
-                <div className="myflex">
+                <div className="d-flex justify-content-start flex-wrap flex-sm-wrap flex-lg-nowrap myflex">
                     {data.map((data)=>{
                         return(
                             <div className="card" style={{width:"30%",backgroundColor:"#f1f1f1"}} key={data.healthNo}>

@@ -2,10 +2,15 @@ import Sidebar from "./layouts";
 import { useState } from "react";
 import style from "./style.module.css"
 import { useNavigate } from "react-router-dom";
-import Card from "../json-packages/Card.json"
+import Card from "../json-packages/Card.json";
+import Modal from "react-bootstrap/Modal"
 
 const AddDep = ()=>{
     const navigate = useNavigate();
+
+     // Modal functions 
+     const [show, setShow] = useState(false);
+
     const[fname,setFname] = useState("");
     const[lname,setLname] = useState("");
     const[gender,setGender] = useState("");
@@ -141,8 +146,14 @@ const AddDep = ()=>{
             setWeight("")
             setPassport("")
             setHealthNo("")
-            navigate("/profileCard")
+            // navigate("/profileCard")
+            setShow(true)
         }
+    }
+    const handleModalClose = ()=>{
+        setShow(false)
+        navigate("/profileCard")
+
     }
     const handleCancel = ()=>{
         navigate("/profileCard");
@@ -253,6 +264,14 @@ const AddDep = ()=>{
                                 <button className="btn btn-danger" style={{marginLeft:"10px"}} onClick={handleCancel}>Cancel</button>
                             </div>
                         </div>
+                        <Modal show={show} size="sm" aria-labelledby="contained-modal-title-vcenter" centered>
+                            <Modal.Body>
+                                <h4 style={{textAlign:"center"}}>Successfully Added</h4>
+                                <div style={{display:"flex",justifyContent:"center"}}>
+                                    <button className="btn btn-primary" onClick={handleModalClose}>okay</button>
+                                </div>
+                            </Modal.Body>
+                        </Modal>
                     </div>
                 </div>
             </>
