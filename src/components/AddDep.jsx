@@ -22,12 +22,20 @@ const AddDep = ()=>{
     const[passport,setPassport] = useState("");
     const[healthNo,setHealthNo] = useState("");
 
+    // Validations
+    let nameRegex = /^([a-zA-Z ]){2,30}$/;
+    let emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    let passportRegex = /^[A-PR-WYa-pr-wy][1-9]\d\s?\d{4}[1-9]$/;
+
+
     const[fnameErrMsg,setFnameErrMsg] = useState("");
     const[lnameErrMsg,setLnameErrMsg] = useState("");
     const[genderErrMsg,setGenderErrMsg] = useState("");
     const[heightErrMsg,setHeightErrMsg] = useState("");
     const[weightErrMsg,setWeightErrMsg] = useState("");
     const[dobErrMsg,setDobErrMsg] = useState("")
+    const[emailErrMsg,setEmailErrMsg] = useState("")
+    const[phoneErrMsg,setPhoneErrMsg] = useState("")
     const[passportErrMsg,setPassportErrMsg] = useState("");
     const[healthErrMsg,setHealthErrMsg] = useState("");
 
@@ -37,6 +45,8 @@ const AddDep = ()=>{
     const[heiValidate,setHeiValidate] = useState(false);
     const[weiValidate,setWeiValidate] = useState(false);
     const[dobValidate,setDobValidate] = useState(false);
+    const[emailValidate,setEmailValidate] = useState(false);
+    const[phoneValidate,setPhoneValidate] = useState(false);
     const[passValidate,setPassValidate] = useState(false);
     const[healthValidate,setHealthValidate] = useState(false);
 
@@ -80,6 +90,8 @@ const AddDep = ()=>{
         setHeightErrMsg("");
         setWeightErrMsg("");
         setDobErrMsg("");
+        setEmailErrMsg("")
+        setPhoneErrMsg("")
         setPassportErrMsg("");
         setHealthErrMsg("");
         setFnameValidate(false)
@@ -88,6 +100,8 @@ const AddDep = ()=>{
         setHeiValidate(false)
         setWeiValidate(false)
         setDobValidate(false)
+        setEmailValidate(false)
+        setPhoneValidate(false)
         setPassValidate(false)
         setHealthValidate(false)
 
@@ -96,9 +110,19 @@ const AddDep = ()=>{
             setFnameErrMsg("Please enter First Name")
             setFnameValidate(true)
         }
+        if(fname !== "" && nameRegex.test(fname)=== false){
+            flag = false
+            setFnameErrMsg("Please enter valid name")
+            setFnameValidate(true)
+        }
         if(lname === ""){
             flag = false;
             setLnameErrMsg("Please enter Last Name")
+            setLnameValidate(true)
+        }
+        if(lname !== "" && nameRegex.test(lname)=== false){
+            flag = false
+            setLnameErrMsg("Please enter valid name")
             setLnameValidate(true)
         }
         if(gender === ""){
@@ -121,14 +145,29 @@ const AddDep = ()=>{
             setDobErrMsg("Please enter Date of Birth")
             setDobValidate(true)
         }
+        if(email !== "" && emailRegex.test(email) === false){
+            flag = false;
+            setEmailErrMsg("Please enter valid email")
+            setEmailValidate(true)
+        }
+        if(phone !== "" && phone.length < 10){
+            flag = false
+            setPhoneErrMsg("Phone number must be 10 digits")
+            setPhoneValidate(true)
+        }
         if(passport === ""){
             flag = false;
             setPassportErrMsg("Please enter Passport Number")
             setPassValidate(true)
         }
+        if(passport !== "" && passportRegex.test(passport) === false){
+            flag = false
+            setPassportErrMsg("Please enter valid passport number")
+            setPassValidate(true)
+        }
         if(healthNo === ""){
             flag = false
-            setPassportErrMsg("Please enter Health Number")
+            setHealthErrMsg("Please enter Health Number")
             setHealthValidate(true)
         }
         if(flag === true){
@@ -202,7 +241,11 @@ const AddDep = ()=>{
                                 <div className="col">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Height(cm)</label>
-                                        <input type="text" className={`form-control ${heiValidate ? "error":""}`}  placeholder="Enter your Height" value={height} onChange={handleHeight}/>
+                                        <input type="text" className={`form-control ${heiValidate ? "error":""}`}  placeholder="Enter your Height" value={height} onChange={handleHeight} onKeyPress={(event) => {
+                                            if (!/[0-9]/.test(event.key)) {
+                                            event.preventDefault();
+                                            }
+                                        }}/>
                                         {heightErrMsg?.length > 0 && (
                                             <p className={style.msg}>{heightErrMsg}</p>
                                         )}
@@ -211,7 +254,11 @@ const AddDep = ()=>{
                                 <div className="col">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Weight(kg)</label>
-                                        <input type="text" className={`form-control ${weiValidate ? "error":""}`}  placeholder="Enter your Weight" value={weight} onChange={handleWeight}/>
+                                        <input type="text" className={`form-control ${weiValidate ? "error":""}`}  placeholder="Enter your Weight" value={weight} onChange={handleWeight} onKeyPress={(event) => {
+                                            if (!/[0-9]/.test(event.key)) {
+                                            event.preventDefault();
+                                            }
+                                        }}/>
                                         {weightErrMsg?.length > 0 && (
                                             <p className={style.msg}>{weightErrMsg}</p>
                                         )}
@@ -231,13 +278,23 @@ const AddDep = ()=>{
                                 <div className="col">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Email(optional)</label>
-                                        <input type="email" className={`form-control`}  placeholder="Enter your Email" value={email} onChange={handleEmail}/>
+                                        <input type="email" className={`form-control ${emailValidate ? "error":""}`}  placeholder="Enter your Email" value={email} onChange={handleEmail}/>
+                                        {emailErrMsg?.length > 0 && (
+                                            <p className={style.msg}>{emailErrMsg}</p>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="col">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Phone Number(optional)</label>
-                                        <input type="text" className={`form-control`}  placeholder="Enter your Phone no" value={phone} onChange={handlePhone}/>
+                                        <input type="text" className={`form-control ${phoneValidate ? "error":""}`}  placeholder="Enter your Phone no" value={phone} onChange={handlePhone} onKeyPress={(event) => {
+                                            if (!/[0-9]/.test(event.key)) {
+                                            event.preventDefault();
+                                            }
+                                        }} maxLength={10}/>
+                                        {phoneErrMsg?.length > 0 && (
+                                            <p className={style.msg}>{phoneErrMsg}</p>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="col">

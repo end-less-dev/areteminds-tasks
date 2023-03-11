@@ -1,5 +1,4 @@
 import Sidebar from "./layouts";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "./style.module.css";
 import Card from "../json-packages/Card.json"
@@ -9,12 +8,11 @@ const ProfileCard = ()=>{
 
     const navigate = useNavigate();
     
-    const[data,setData]  = useState(Card)
-    
     const handleDelete = (data)=>{
-		setData(Card.filter((x)=>x.healthNo !== data))
+        const index = Card.findIndex((y)=>y.healthNo === data)
+        Card.splice(index,1)
+        navigate("/profileCard")
 	}
-
     const addDepPage = ()=>{
         navigate("/addDep")
     }
@@ -37,7 +35,7 @@ const ProfileCard = ()=>{
                 <hr />
                 {/* Card */}
                 <div className="d-flex justify-content-start flex-wrap flex-sm-wrap flex-lg-nowrap myflex">
-                    {data.map((data)=>{
+                    {Card.map((data)=>{
                         return(
                             <div className="card" style={{width:"30%",backgroundColor:"#f1f1f1"}} key={data.healthNo}>
                                 <div className="card-body">

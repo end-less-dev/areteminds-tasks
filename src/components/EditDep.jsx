@@ -12,6 +12,7 @@ const EditDep = ()=>{
     const [show, setShow] = useState(false);
 
     const {id} = useParams();
+
     const idData = Card.find((x)=>x.healthNo === id)
     const index = Card.findIndex((y)=>y.healthNo === id)
     console.log("Index of editPage->",index)
