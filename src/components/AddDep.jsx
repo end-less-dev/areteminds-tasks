@@ -145,6 +145,11 @@ const AddDep = ()=>{
             setDobErrMsg("Please enter Date of Birth")
             setDobValidate(true)
         }
+        if(dob !== "" && new Date() < new Date(dob)){
+            flag = false
+            setDobErrMsg("Please pick valid DOB")
+            setDobValidate(true)
+        }
         if(email !== "" && emailRegex.test(email) === false){
             flag = false;
             setEmailErrMsg("Please enter valid email")
@@ -310,7 +315,11 @@ const AddDep = ()=>{
                             <div className="row">
                                 <div class="mb-3" style={{width:"33%"}}>
                                     <label for="exampleFormControlInput1" class="form-label">Provincial Healt Number</label>
-                                    <input type="text" className={`form-control ${healthValidate ? "error":""}`}  placeholder="57764646" value={healthNo} onChange={handleHealth}/>
+                                    <input type="text" className={`form-control ${healthValidate ? "error":""}`}  placeholder="57764646" value={healthNo} onChange={handleHealth} onKeyPress={(event) => {
+                                            if (!/[0-9]/.test(event.key)) {
+                                            event.preventDefault();
+                                            }
+                                        }}/>
                                     {healthErrMsg?.length > 0 && (
                                         <p className={style.msg}>{healthErrMsg}</p>
                                     )}

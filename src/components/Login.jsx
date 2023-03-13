@@ -62,7 +62,8 @@ const Login =()=>{
         }
     }
     return(
-        <>
+        <div className="login-bg">
+        
         <div className="gap"></div>
         <div className="container" style={{width:"70%"}}>
             <div className="card col-md-6 offset-md-3 offset-md-3 box login">
@@ -94,7 +95,7 @@ const Login =()=>{
                 </div>
             </div>
         </div>
-        </>
+        </div>
     )
 }
 export default Login;

@@ -62,7 +62,9 @@ const PersonalInfo = ()=>{
 
     //Regular Expressions
     let aadharNoRegEx = /^[2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4}$/;
-    let PassportRegEx = /^[A-PR-WYa-pr-wy][1-9]\\d\\s?\\d{4}[1-9]$/;
+    let passportRegex = /^[A-PR-WYa-pr-wy][1-9]\d\s?\d{4}[1-9]$/;
+    let nameRegex = /^([a-zA-Z ]){2,30}$/;
+
 
     const handleName = (e)=>{
         setName(e.target.value)
@@ -107,6 +109,11 @@ const PersonalInfo = ()=>{
             setNameValidate(true)
             setNameErrMsg("Please enter the name")
         }
+        if(name !== "" && nameRegex.test(name) === false){
+            flag = false
+            setNameErrMsg("Please valid name")
+            setNameValidate(true)
+        }
         if(aadharNo === ""){
             flag = false
             setAadharNoValidate(true)
@@ -127,7 +134,7 @@ const PersonalInfo = ()=>{
             setPassportValidate(true)
             setPassportErrMsg("Please enter Passport Number")
         }
-        if(passportNo !== "" && PassportRegEx.test(passportNo) === false){
+        if(passportNo !== "" && passportRegex.test(passportNo) === false){
             flag = false
             setPassportValidate(true)
             setPassportErrMsg("Please valid Passport Number")
@@ -146,6 +153,11 @@ const PersonalInfo = ()=>{
             flag = false
             setDobValidate(true)
             setDobErrMsg("Please enter Date of Birth")
+        }
+        if(dateValue !== "" && new Date() < new Date(dateValue)){
+            flag = false
+            setDobErrMsg("Please pick valid DOB")
+            setDobValidate(true)
         }
         if(religion === ""){
             flag = false
@@ -170,6 +182,13 @@ const PersonalInfo = ()=>{
             }
         }
         if(flag === true){
+            setName("")
+            setAadharNo("")
+            setPassportNo("")
+            setPassExpiry("")
+            setDateValue("")
+            setReligion("")
+            setMarital("singal")
             window.alert("Saved")
         }
     }
