@@ -15,6 +15,8 @@ import ProfileCard from "./components/ProfileCard";
 import AddDep from "./components/AddDep";
 import EditDep from "./components/EditDep";
 import ViewDep from "./components/ViewDep";
+import SuperAdmin from "./components/SuperAdmin";
+import CreateUser from "./components/CreateUser";
 
 const App =()=>{
     return(
@@ -36,6 +38,8 @@ const App =()=>{
                 <Route path="/addDep" element={<AddDep/>}/>
                 <Route path="/editDep/:id" element={<EditDep/>}/>
                 <Route path="/viewDep/:viewId" element={<ViewDep/>}/>
+                <Route path="/superAdmin" element={<SuperAdmin/>}/>
+                <Route path="/createUser" element={<CreateUser/>}/>
             </Routes>
         </Router>
     )

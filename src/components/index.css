@@ -59,6 +59,8 @@ a{
     justify-content: space-between;
     align-items: center;
     padding-top: 20px;
+    position: sticky;
+    top: 0;
 }
 .filter-div .filter-inputs{
     display: flex;
