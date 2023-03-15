@@ -3,6 +3,7 @@ import style from "./style.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import { useEffect,useState } from "react";
+import { GET_ROLEBY_ID } from "./utils/constant";
 
 const SuperAdmin = ()=>{
 
@@ -12,7 +13,7 @@ const SuperAdmin = ()=>{
     const[searchTerm,setSearchTerm] = useState("");
     useEffect(()=>{
         async function func(){
-            await axios.get("http://44.193.1.40:8080/app/api/user/getUsersByRoleId/1")
+            await axios.get(GET_ROLEBY_ID)
             .then((res)=>{
                 setUser(res.data)
                 setFilterData(res.data.data)
@@ -25,7 +26,7 @@ const SuperAdmin = ()=>{
     if (!user || user.length === 0) {
         return <div>No data available.</div>;
       } 
-    console.log(user);
+    console.log("unFilteredData",user);
 
     const handleSearch = (e)=>{
         setSearchTerm(e.target.value)
