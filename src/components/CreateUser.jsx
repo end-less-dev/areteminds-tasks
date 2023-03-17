@@ -1,72 +1,138 @@
 import Sidebar from "./layouts";
 import style from "./style.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { CREATE_DATA_ENTRY_OP } from "./utils/constant";
+import axios from "axios";
 
 const CreateUser = ()=>{
 
     const navigate = useNavigate();
-    const[username,setUserName] = useState("");
-    const[fname,setFname] = useState("");
-    const[phone,setPhone] = useState("");
+    const[response,setResponse] = useState("")
+    const[userName,setUserName] = useState("");
+    const[firstName,setFname] = useState("");
+    const[lastName,setLname] = useState("")
+    const[newPassword,setPassword] = useState("");
     const[email,setEmail] = useState("");
 
     const[unameErrMsg,setUNameErrMsg] = useState("");
     const[fnameErrMsg,setFnameErrMsg] = useState("");
-    const[phoneErrMsg,setPhoneErrMsg] = useState("");
+    const[lnameErrMsg,setLnameErrMsg] = useState("")
+    const[passswordErrMsg,setPasswordErrMsg] = useState("");
     const[emailErrMsg,setEmailErrMsg] = useState("");
 
     const[unameValidate,setUnameValidate] = useState(false);
     const[fnameValidate,setFnameValidate] = useState(false);
-    const[phoneValidate,setPhoneValidate] = useState(false);
+    const[lnameValidate,setLnameValidate] = useState(false)
+    const[passwordValidate,setPasswordValidate] = useState(false);
     const[emailValidate,setEmailValidate] = useState(false);
 
+    let nameRegex = /^([a-zA-Z ]){2,30}$/;
+    let emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    let passwordRegEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+
+    // useEffect(()=>{
+    //    axios.post(CREATE_DATA_ENTRY_OP)
+    //    .then((res)=>setResponse(res.status))
+    //    .catch((err)=>console.log(err))
+    // })
+    //console.log("Create user API response",response)
     const handleUname =(e)=>{
         setUserName(e.target.value)
     }
     const handleFname = (e)=>{
         setFname(e.target.value)
     }
-    const handlePhone = (e)=>{
-        setPhone(e.target.value)
+    const handleLname = (e)=>{
+        setLname(e.target.value)
+    }
+    const handlePassword = (e)=>{
+        setPassword(e.target.value)
     }
     const handleEmail = (e) =>{
         setEmail(e.target.value)
     }
+
     const handleSubmit = e =>{
         e.preventDefault();
         let flag = true;
         setUNameErrMsg("")
         setFnameErrMsg("")
-        setPhoneErrMsg("")
+        setLnameErrMsg("")
+        setPasswordErrMsg("")
         setEmailErrMsg("")
         setUnameValidate(false)
         setFnameValidate(false)
-        setPhoneValidate(false)
+        setLnameValidate(false)
+        setPasswordValidate(false)
         setEmailValidate(false)
 
-        if(username === ""){
+        if(userName === ""){
             flag = false;
             setUNameErrMsg("Required")
             setUnameValidate(true)
         }
-        if(fname === ""){
+        if(firstName === ""){
             flag = false
             setFnameErrMsg("Required")
             setFnameValidate(true)
         }
-        if(phone === ""){
+        if(firstName !== "" && nameRegex.test(firstName)=== false){
             flag = false
-            setPhoneErrMsg("Required")
-            setPhoneValidate(true)
+            setFnameErrMsg("Please enter valid name")
+            setFnameValidate(true)
+        }
+        if(lastName === ""){
+            flag = false
+            setLnameErrMsg("Required")
+            setLnameValidate(true)
+        }
+        if(lastName !== "" && nameRegex.test(lastName)=== false){
+            flag = false
+            setLnameErrMsg("Please enter valid name")
+            setLnameValidate(true)
+        }
+        if(newPassword === ""){
+            flag = false
+            setPasswordErrMsg("Required")
+            setPasswordValidate(true)
+        }
+        if(newPassword !== "" && passwordRegEx.test(newPassword) === false){
+            flag = false
+            setPasswordValidate(true)
+            setPasswordErrMsg("Password must be combination of 0-9,a-z,A-Z,!@#$%^&*()")
+        }
+        if(newPassword !== "" && newPassword.length < 8){
+            flag = false;
+            setPasswordValidate(true);
+            setPasswordErrMsg("Password must be 8 characters")
         }
         if(email === ""){
             flag = false
             setEmailErrMsg("Required")
             setEmailValidate(true)
         }
+        if(email !== "" && emailRegex.test(email) === false){
+            flag = false;
+            setEmailErrMsg("Please enter valid email")
+            setEmailValidate(true)
+        }
         if(flag === true){
-
+            const formData = {userName,firstName,lastName,email,newPassword}
+            const Data = JSON.stringify(formData)
+            console.log(Data)
+            const headers = {'Content-Type':'application/json'}
+            axios(CREATE_DATA_ENTRY_OP,{
+                method:"POST",
+                headers,
+                data:Data
+            })
+            .then((res)=>{
+                navigate("/superAdmin")
+                setResponse(res.status)
+            })
+            
+            .catch((error)=>console.log(alert(error)))
         }
     }
 
@@ -86,7 +152,7 @@ const CreateUser = ()=>{
                             <div className="col-md">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">User Name</label>
-                                    <input type="text" className={`form-control ${unameValidate ? "error":""}`} id="exampleFormControlInput1" placeholder="Please enter Username" value={username} onChange={handleUname}/>
+                                    <input type="text" className={`form-control ${unameValidate ? "error":""}`} id="exampleFormControlInput1" placeholder="Please enter Username" value={userName} onChange={handleUname}/>
                                     {unameErrMsg?.length > 0 && (
                                         <p className={style.msg}>{unameErrMsg}</p>
                                     )}
@@ -95,7 +161,7 @@ const CreateUser = ()=>{
                             <div className="col-md">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">First Name</label>
-                                    <input type="text" className={`form-control ${fnameValidate ? "error":""}`} id="exampleFormControlInput1" placeholder="Fist name" value={fname} onChange={handleFname}/>
+                                    <input type="text" className={`form-control ${fnameValidate ? "error":""}`} id="exampleFormControlInput1" placeholder="Fist name" value={firstName} onChange={handleFname}/>
                                     {fnameErrMsg?.length > 0 && (
                                         <p className={style.msg}>{fnameErrMsg}</p>
                                     )}
@@ -105,10 +171,10 @@ const CreateUser = ()=>{
                         <div className="row">
                             <div className="col-md">
                                 <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Phone Number</label>
-                                    <input type="text" className={`form-control ${phoneValidate ? "error":""}`} id="exampleFormControlInput1" placeholder="Phone number" value={phone} onChange={handlePhone}/>
-                                    {phoneErrMsg?.length > 0 && (
-                                        <p className={style.msg}>{phoneErrMsg}</p>
+                                    <label for="exampleFormControlInput1" class="form-label">Last Name</label>
+                                    <input type="text" className={`form-control ${lnameValidate ? "error":""}`} id="exampleFormControlInput1" placeholder="Phone number" value={lastName} onChange={handleLname}/>
+                                    {lnameErrMsg?.length > 0 && (
+                                        <p className={style.msg}>{lnameErrMsg}</p>
                                     )}
                                 </div>
                             </div>
@@ -118,6 +184,17 @@ const CreateUser = ()=>{
                                     <input type="email" className={`form-control ${emailValidate ? "error":""}`} id="exampleFormControlInput1" placeholder="Email" value={email} onChange={handleEmail}/>
                                     {emailErrMsg?.length > 0 && (
                                         <p className={style.msg}>{emailErrMsg}</p>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md">
+                                <div className="mb-3" style={{width:"50%"}}>
+                                    <label for="exampleFormControlInput1" class="form-label">Password</label>
+                                    <input type="password" className={`form-control ${passwordValidate ? "error":""}`} id="exampleFormControlInput1" placeholder="Email" value={newPassword} onChange={handlePassword}/>
+                                    {passswordErrMsg?.length > 0 && (
+                                        <p className={style.msg}>{passswordErrMsg}</p>
                                     )}
                                 </div>
                             </div>

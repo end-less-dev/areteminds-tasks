@@ -3,35 +3,53 @@ import Sidebar from "./layouts";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "./utils/constant";
+// import Pagination from "./utils/Pagination";
+import ReactPaginate from "react-paginate";
+
+
 const List = ()=>{
     const[items,setItems] = useState([]);
     const[searchTerm,setSearchTerm] = useState("");
+    const[searchMail,setSearchMail] = useState("")
     const[filterData,setFilterData] = useState([]);
-
-    
+    const[currentPage,setCurrentPage] = useState(1)
+    const hanlePage =(e)=>{
+        console.log(e.selected)
+        setCurrentPage(e.selected + 1)
+    }
     useEffect(()=>{
-        axios.get(API_URL)
+        axios.get(`${API_URL}/?_page=${currentPage}&_limit=10`)
         .then((response)=>{
             setItems(response.data);
             setFilterData(response.data)
         })
         .catch((error)=>console.log(error))
-    },[searchTerm])
+    },[searchTerm,currentPage])
 
     // useEffect(()=>{
     //     setFilterData(items.filter((x)=>x.name.toLowerCase().includes(searchTerm.toLowerCase())))
     // },[searchTerm,items]);
 
     const handleFilter = ()=>{
-        setFilterData(items.filter((x)=>x.name.toLowerCase().includes(searchTerm.toLowerCase())))
+
+        const fill = items.filter((x)=>{
+            if(x.name.toLowerCase().includes(searchTerm.toLowerCase()) && (x.email.toLowerCase().includes(searchMail.toLowerCase()))){
+                return true
+            }
+        })
+        setFilterData(fill)
     }
     const clearFilter = ()=>{
         setSearchTerm("")
+        setSearchMail("")
         //setFilterData(items.filter((x)=>x.name.toLowerCase().includes(searchTerm.toLowerCase())))
     }
 
     const handleInput = (e)=>{
         setSearchTerm(e.target.value)
+    }
+    const handleInputMail = (e)=>{
+        setSearchMail(e.target.value)
     }
     const[name,setName]= useState("");
     const handleName = (e)=>{
@@ -42,6 +60,7 @@ const List = ()=>{
     const view = (id)=>{
         navigate(`/viewList/${id}`)
     }
+    console.log("length of filteredArrar",filterData.length)
     return(
         <>
         <div className="layout-content">
@@ -50,7 +69,7 @@ const List = ()=>{
                 <div className="filter-div">
                     <div className="filter-inputs">
                     <input type="text" class="form-control" id="myInput" placeholder="Search Name" value={searchTerm} onChange={handleInput}/>
-                    {/* <input type="email" class="form-control" id="myInput2" placeholder="Search Email"/> */}
+                    <input type="email" class="form-control" id="myInput2" placeholder="Search Email" value={searchMail} onChange={handleInputMail}/>
                     </div>
                     <div className="filter-btns">
                         <button className="btn btn-primary" onClick={handleFilter}>Apply Filter</button>
@@ -82,6 +101,25 @@ const List = ()=>{
                     })}
                     </tbody>
                     </table>
+                    <div className="d-flex justify-content-center">
+                    <ReactPaginate
+                        previousLabel={'pre'}
+                        nextLabel={'next'}
+                        breakLabel={"..."}
+                        pageCount={10}
+                        marginPagesDisplayed={3}
+                        pageRangeDisplayed={6}
+                        onPageChange={hanlePage}
+                        containerClassName={'pagination'}
+                        previousClassName={'page-item'}
+                        previousLinkClassName={'page-link'}
+                        nextClassName={'page-item'}
+                        pageLinkClassName={'page-link'}
+                        nextLinkClassName={'page-link'}
+                        breakClassName={'page-item'}
+                        breakLinkClassName={'page-link'}
+                    />
+                    </div>
                 </div>
             </div>
         </div>

@@ -17,6 +17,7 @@ import EditDep from "./components/EditDep";
 import ViewDep from "./components/ViewDep";
 import SuperAdmin from "./components/SuperAdmin";
 import CreateUser from "./components/CreateUser";
+import SuperAdminCurl from "./components/SuperAdminCurl";
 
 const App =()=>{
     return(
@@ -40,6 +41,7 @@ const App =()=>{
                 <Route path="/viewDep/:viewId" element={<ViewDep/>}/>
                 <Route path="/superAdmin" element={<SuperAdmin/>}/>
                 <Route path="/createUser" element={<CreateUser/>}/>
+                <Route path="/superAdminCurl" element={<SuperAdminCurl/>}/>
             </Routes>
         </Router>
     )
