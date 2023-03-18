@@ -42,18 +42,18 @@ const SuperAdmin = ()=>{
     }
     const handleFilter = ()=>{
         setFilterData(user.data.filter((x)=>{
-            if(x.user.emailAddress !== null && x.user.userName !== null){
-                const email = x.user.emailAddress.toLowerCase();
-                const uname = x.user.userName.toLowerCase();
+            if(x.emailAddress !== null && x.userName !== null){
+                const email = x.emailAddress.toLowerCase();
+                const uname = x.userName.toLowerCase();
                 if(email.includes(searchTerm) || uname.includes(searchTerm)){
                     return x
                 }
             }
         }))
     }
-    if (!filterData || filterData.length === 0) {
-        return <div>No data available.</div>;
-      } 
+    // if (!filterData || filterData.length === 0) {
+    //     return <div>No data available.</div>;
+    //   } 
     const clearFilter = ()=>{
         setSearchTerm("")
     }
@@ -106,11 +106,11 @@ const SuperAdmin = ()=>{
                                 <tbody>
                                     {displayData && displayData.map((newData) => {
                                         return (
-                                        <tr  key={newData.user.id}>
-                                            <td>{newData.user.userName}</td>
-                                            <td>{newData.user.firstName}</td>
-                                            <td>{newData.user.emailAddress}</td>
-                                            <td>{newData.user.phoneNumber}</td>
+                                        <tr  key={newData.id}>
+                                            <td>{newData.userName}</td>
+                                            <td>{newData.firstName}</td>
+                                            <td>{newData.emailAddress}</td>
+                                            <td>{newData.phoneNumber}</td>
                                             <td><i class="bi bi-three-dots-vertical"></i></td>
                                         </tr>
                                         );
@@ -123,7 +123,7 @@ const SuperAdmin = ()=>{
                                     nextLabel={'next'}
                                     breakLabel={"..."}
                                     pageCount={pageCount}
-                                    marginPagesDisplayed={3}
+                                    marginPagesDisplayed={1}
                                     pageRangeDisplayed={6}
                                     onPageChange={handlePage}
                                     containerClassName={'pagination'}

@@ -45,9 +45,6 @@ const Sidebar = () => {
             <NavLink exact to="/superAdmin" activeClassName="activeClicked" title="Super Admin">
               <CDBSidebarMenuItem icon="list">Super Admin</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/superAdminCurl" activeClassName="activeClicked" title="Super Admin Curl">
-              <CDBSidebarMenuItem icon="list">Super Admin Curl</CDBSidebarMenuItem>
-            </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
 

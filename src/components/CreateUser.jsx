@@ -1,6 +1,6 @@
 import Sidebar from "./layouts";
 import style from "./style.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CREATE_DATA_ENTRY_OP } from "./utils/constant";
 import axios from "axios";
@@ -118,7 +118,8 @@ const CreateUser = ()=>{
             setEmailValidate(true)
         }
         if(flag === true){
-            const formData = {userName,firstName,lastName,email,newPassword}
+            const roleId = "06476e15-dfae-4068-8beb-e5bce310ee6a"
+            const formData = {userName,firstName,lastName,email,newPassword,roleId}
             const Data = JSON.stringify(formData)
             console.log(Data)
             const headers = {'Content-Type':'application/json'}
@@ -135,6 +136,7 @@ const CreateUser = ()=>{
             .catch((error)=>console.log(alert(error)))
         }
     }
+    console.log("API-RESPONSE",response)
 
     const handleCancel = ()=>{
         navigate("/superAdmin")
@@ -161,7 +163,7 @@ const CreateUser = ()=>{
                             <div className="col-md">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">First Name</label>
-                                    <input type="text" className={`form-control ${fnameValidate ? "error":""}`} id="exampleFormControlInput1" placeholder="Fist name" value={firstName} onChange={handleFname}/>
+                                    <input type="text" className={`form-control ${fnameValidate ? "error":""}`} id="exampleFormControlInput1" placeholder="Please enter first name" value={firstName} onChange={handleFname}/>
                                     {fnameErrMsg?.length > 0 && (
                                         <p className={style.msg}>{fnameErrMsg}</p>
                                     )}
@@ -172,7 +174,7 @@ const CreateUser = ()=>{
                             <div className="col-md">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Last Name</label>
-                                    <input type="text" className={`form-control ${lnameValidate ? "error":""}`} id="exampleFormControlInput1" placeholder="Phone number" value={lastName} onChange={handleLname}/>
+                                    <input type="text" className={`form-control ${lnameValidate ? "error":""}`} id="exampleFormControlInput1" placeholder="Please enter your last name" value={lastName} onChange={handleLname}/>
                                     {lnameErrMsg?.length > 0 && (
                                         <p className={style.msg}>{lnameErrMsg}</p>
                                     )}
@@ -181,7 +183,7 @@ const CreateUser = ()=>{
                             <div className="col-md">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Email</label>
-                                    <input type="email" className={`form-control ${emailValidate ? "error":""}`} id="exampleFormControlInput1" placeholder="Email" value={email} onChange={handleEmail}/>
+                                    <input type="email" className={`form-control ${emailValidate ? "error":""}`} id="exampleFormControlInput1" placeholder="Please enter your Email" value={email} onChange={handleEmail}/>
                                     {emailErrMsg?.length > 0 && (
                                         <p className={style.msg}>{emailErrMsg}</p>
                                     )}
@@ -192,7 +194,7 @@ const CreateUser = ()=>{
                             <div className="col-md">
                                 <div className="mb-3" style={{width:"50%"}}>
                                     <label for="exampleFormControlInput1" class="form-label">Password</label>
-                                    <input type="password" className={`form-control ${passwordValidate ? "error":""}`} id="exampleFormControlInput1" placeholder="Email" value={newPassword} onChange={handlePassword}/>
+                                    <input type="password" className={`form-control ${passwordValidate ? "error":""}`} id="exampleFormControlInput1" placeholder="Please enter Password" value={newPassword} onChange={handlePassword}/>
                                     {passswordErrMsg?.length > 0 && (
                                         <p className={style.msg}>{passswordErrMsg}</p>
                                     )}
