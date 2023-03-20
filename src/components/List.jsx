@@ -48,9 +48,9 @@ const List = ()=>{
     const handleInput = (e)=>{
         setSearchTerm(e.target.value)
     }
-    const handleInputMail = (e)=>{
-        setSearchMail(e.target.value)
-    }
+    // const handleInputMail = (e)=>{
+    //     setSearchMail(e.target.value)
+    // }
     const[name,setName]= useState("");
     const handleName = (e)=>{
         setName(e.target.value)
@@ -69,7 +69,7 @@ const List = ()=>{
                 <div className="filter-div">
                     <div className="filter-inputs">
                     <input type="text" class="form-control" id="myInput" placeholder="Search Name" value={searchTerm} onChange={handleInput}/>
-                    <input type="email" class="form-control" id="myInput2" placeholder="Search Email" value={searchMail} onChange={handleInputMail}/>
+                    {/* <input type="email" class="form-control" id="myInput2" placeholder="Search Email" value={searchMail} onChange={handleInputMail}/> */}
                     </div>
                     <div className="filter-btns">
                         <button className="btn btn-primary" onClick={handleFilter}>Apply Filter</button>

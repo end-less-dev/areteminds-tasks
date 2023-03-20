@@ -1,4 +1,4 @@
-import Sidebar from "./layouts";
+import RestrauntSidebar from "./Restraunt/RestrauntSidebar";
 import style from "./style.module.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -145,7 +145,7 @@ const CreateUser = ()=>{
     return(
         <>
             <div className="layout-content">
-                <Sidebar/>
+                <RestrauntSidebar/>
                 <div className="org-container">
                     <h1 style={{textAlign:"center"}} className={style.logo}>Create User</h1>
                     <br />

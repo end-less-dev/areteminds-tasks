@@ -18,6 +18,9 @@ import ViewDep from "./components/ViewDep";
 import SuperAdmin from "./components/SuperAdmin";
 import CreateUser from "./components/CreateUser";
 import SuperAdminCurl from "./components/SuperAdminCurl";
+import RestrauntHome from "./components/Restraunt/RestrauntHome";
+import Orders from "./components/Restraunt/Orders";
+import ViewOrders from "./components/Restraunt/ViewOrders";
 
 const App =()=>{
     return(
@@ -42,6 +45,9 @@ const App =()=>{
                 <Route path="/superAdmin" element={<SuperAdmin/>}/>
                 <Route path="/createUser" element={<CreateUser/>}/>
                 <Route path="/superAdminCurl" element={<SuperAdminCurl/>}/>
+                <Route path="/restrauntHome" element={<RestrauntHome/>}/>
+                <Route path="/orders" element={<Orders/>}/>
+                <Route path="viewOrders/:id" element={<ViewOrders/>}/>
             </Routes>
         </Router>
     )

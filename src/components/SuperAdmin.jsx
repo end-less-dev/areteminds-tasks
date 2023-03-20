@@ -1,4 +1,4 @@
-import Sidebar from "./layouts";
+import RestrauntSidebar from "./Restraunt/RestrauntSidebar";
 import style from "./style.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios"
@@ -31,7 +31,8 @@ const SuperAdmin = ()=>{
     },[searchTerm])
     console.log("API response",response)
     if (!user || user.length === 0) {
-        return <div style={{height:"100vh",width:"100%",display:"flex",justifyContent:"center",alignItems:"center"}}><div class="spinner-grow text-primary" role="status" style={{height:"50px",width:"50px",display:"flex",justifyContent:"center",alignItems:"center"}}>
+        return <div style={{height:"100vh",width:"100%",display:"flex",justifyContent:"center",alignItems:"center"}}>
+            <div class="spinner-grow text-primary" role="status" style={{height:"50px",width:"50px",display:"flex",justifyContent:"center",alignItems:"center"}}>
         <span class="visually-hidden">Loading...</span>
       </div></div>
       } 
@@ -74,7 +75,7 @@ const SuperAdmin = ()=>{
     return(
         <>
             <div className="layout-content">
-                <Sidebar/>
+                <RestrauntSidebar/>
                 <div className="org-container">
                     
                         <h1 style={{textAlign:"center"}} className={style.logo}>Super Admin Data Entry Operator User</h1>
