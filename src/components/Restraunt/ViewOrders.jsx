@@ -7,7 +7,6 @@ const ViewOrders = ()=>{
     
     const {id} = useParams();
     const[data,setData] = useState([]);
-    const[orderNo,setOrderNo] = useState("")
     useEffect(()=>{
         const apiFun = async ()=>{
             await axios.get(`${ORDERS}/${id}`)
@@ -20,9 +19,28 @@ const ViewOrders = ()=>{
         apiFun();
     },[id])
     
+    const value = data.filter((res)=>res.orderNumber === id)
+    console.log("Values",value)
 
+    const OrderNoo = value.map((x)=>x.orderNumber)
+    const customerName = value.map((x)=>x.userDetails.firstName)
+    const amount = value.map((x)=>x.total)
+    const status = value.map((x)=>x.orderStatus)
+    const tax = value.map((x)=>x.salesTax)
+    const tip = value.map((x)=>x.tip)
+    const serviceCharge = value.map((x)=>x.serviceCharges)
 
+    const produtList = value.map((x)=>x.productList)
+    console.log("productList",produtList)
 
+    const extractedData = produtList.flatMap(array =>
+        array.map(({ name, price, quantity }) => ({
+            name,
+            quantity,
+            price,
+        }))
+    );
+    console.log("ExtractedData",extractedData)
     const navigate = useNavigate();
     const handleSave = ()=>{
         navigate("/orders")
@@ -44,13 +62,13 @@ const ViewOrders = ()=>{
                         <div className="col-md">
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">ORDER NUMBER</label>
-                                <input type="text" class="form-control inp-shadow" value={orderNo} readOnly disabled/>
+                                <input type="text" class="form-control inp-shadow" value={OrderNoo} readOnly disabled/>
                             </div>
                         </div>
                         <div className="col-md">
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">CUSTOMER NAME</label>
-                                <input type="text" class="form-control inp-shadow" readOnly disabled/>
+                                <input type="text" class="form-control inp-shadow" value={customerName} readOnly disabled/>
                             </div>
                         </div>
                     </div>
@@ -58,13 +76,13 @@ const ViewOrders = ()=>{
                         <div className="col-md">
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">AMOUNT</label>
-                                <input type="text" class="form-control inp-shadow" readOnly disabled/>
+                                <input type="text" class="form-control inp-shadow" value={amount} readOnly disabled/>
                             </div>
                         </div>
                         <div className="col-md">
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">STATUS</label>
-                                <input type="text" class="form-control inp-shadow" readOnly disabled/>
+                                <input type="text" class="form-control inp-shadow" value={status} readOnly disabled/>
                             </div>
                         </div>
                     </div>
@@ -83,7 +101,17 @@ const ViewOrders = ()=>{
                                     <th scope="col">ITEM AMOUNT</th>
                                 </tr>
                             </thead>
-
+                            <tbody>
+                               {extractedData.map((x)=>{
+                                return(
+                                    <tr>
+                                        <td>{x.name}</td>
+                                        <td>{x.quantity}</td>
+                                        <td>${x.price}</td>
+                                    </tr>
+                                )
+                               })}
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -96,19 +124,19 @@ const ViewOrders = ()=>{
                         <div className="col-md">
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">TAX</label>
-                                <input type="text" class="form-control inp-shadow" readOnly disabled/>
+                                <input type="text" class="form-control inp-shadow" value={tax} readOnly disabled/>
                             </div>
                         </div>
                         <div className="col-md">
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">TIP</label>
-                                <input type="text" class="form-control inp-shadow" readOnly disabled/>
+                                <input type="text" class="form-control inp-shadow" value={tip} readOnly disabled/>
                             </div>
                         </div>
                         <div className="col-md">
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">SERVICE CHARGE</label>
-                                <input type="text" class="form-control inp-shadow" readOnly disabled/>
+                                <input type="text" class="form-control inp-shadow" value={"$ "+serviceCharge} readOnly disabled/>
                             </div>
                         </div>
                     </div>
