@@ -62,11 +62,8 @@ const Login =()=>{
         }
     }
     return(
-        <div className="login-bg">
-        
-        <div className="gap"></div>
-        <div className="container" style={{width:"70%"}}>
-            <div className="card col-md-6 offset-md-3 offset-md-3 box login">
+        <div style={{height:"100vh"}} className="d-flex justify-content-center align-items-center">
+            <div className="card col-md-6 box">
                 <div className="card-body">
                     <div className="card-title title">Log In</div>
                     <div class="mb-3">
@@ -94,7 +91,6 @@ const Login =()=>{
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     )
 }
