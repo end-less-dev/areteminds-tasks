@@ -18,6 +18,10 @@ const Orders = ()=>{
         }
         apiFun();
     },[])
+    
+    localStorage.setItem("OrderData",JSON.stringify(data))
+   // console.log("getting from local",localStorage.getItem("OrderData"))
+   
     // Pagination
     const postPerPage = 10
     const pageCount = Math.ceil(data.length / postPerPage)
@@ -40,7 +44,7 @@ const Orders = ()=>{
             <RestrauntSidebar/>
             <div className="org-container">
                 <h1>Orders</h1>
-                <div className="table-responsive-sm table-responsive-md table-responsive-lg">
+                <div className="table-responsive-sm table-responsive-md table-responsive-lg" >
                     <table className="table table-striped text-center">
                         <thead>
                             <tr>
@@ -65,7 +69,7 @@ const Orders = ()=>{
                                         <td>{item.orderStatus}</td>
                                         <td>
                                         <div class="btn-group dropstart">
-                                            <button type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <button type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{background:"transparent"}}>
                                                 <i class="bi bi-three-dots-vertical"></i>
                                             </button>
                                             <ul class="dropdown-menu text-center">

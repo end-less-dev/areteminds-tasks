@@ -27,7 +27,7 @@ const RestrauntSidebar = () => {
             <NavLink exact to="/superAdmin" activeClassName="activeClicked" title="Super Admin">
               <CDBSidebarMenuItem icon="list">Super Admin</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/orders" activeClassName="activeClicked" title="Home">
+            <NavLink exact to="/orders" activeClassName="activeClicked" title="Orders">
               <CDBSidebarMenuItem icon="plus">Orders</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
