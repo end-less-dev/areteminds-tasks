@@ -22,9 +22,8 @@ a{
   background:cornsilk;
 }
 .title{
-    font-size: 2rem;
     text-align: center;
-    font-weight: 400;
+    font-weight: 800;
 }
 .layout-content{
     display: flex;
@@ -102,7 +101,6 @@ Button{
 }
 .inp-shadow{
     box-shadow: 2px 2px 2px black;
-    filter: drop-shadow(0 0 0.50rem rgb(83, 4, 230));
 }
 h6{
     font-weight: 800;

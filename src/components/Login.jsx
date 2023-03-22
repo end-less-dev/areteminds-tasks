@@ -62,10 +62,10 @@ const Login =()=>{
         }
     }
     return(
-        <div style={{height:"100vh"}} className="d-flex justify-content-center align-items-center">
-            <div className="card col-md-6 box">
+        <div style={{height:"100vh",background:"#A084DC"}} className="d-flex justify-content-center align-items-center">
+            <div className="card col-md-6" style={{background:"#BFACE2"}}>
                 <div className="card-body">
-                    <div className="card-title title">Log In</div>
+                    <h1 className="title">Log In</h1>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Email address</label>
                         <input type="email" className={`form-control ${emailValidate? "error":""}`} id="exampleFormControlInput1" placeholder="name@example.com" value={email} onChange={handleEmail}/>
