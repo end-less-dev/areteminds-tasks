@@ -91,7 +91,7 @@ const ViewOrders = ()=>{
                             <div className="col-md">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">AMOUNT</label>
-                                    <input type="text" class="form-control inp-shadow" value={localMatched.total} readOnly disabled/>
+                                    <input type="text" class="form-control inp-shadow" value={"$ "+localMatched.total} readOnly disabled/>
                                 </div>
                             </div>
                             <div className="col-md">
@@ -148,13 +148,13 @@ const ViewOrders = ()=>{
                             <div className="col-md">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">TAX</label>
-                                    <input type="text" class="form-control inp-shadow" value={localMatched.salesTax} readOnly disabled/>
+                                    <input type="text" class="form-control inp-shadow" value={"$ "+localMatched.salesTax} readOnly disabled/>
                                 </div>
                             </div>
                             <div className="col-md">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">TIP</label>
-                                    <input type="text" class="form-control inp-shadow" value={localMatched.tip} readOnly disabled/>
+                                    <input type="text" class="form-control inp-shadow" value={"$ "+localMatched.tip} readOnly disabled/>
                                 </div>
                             </div>
                             <div className="col-md">
